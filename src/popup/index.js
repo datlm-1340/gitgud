@@ -147,9 +147,10 @@ function loadSettings(repositoryKey) {
   });
 };
 
-function loadOptionForSelects(repositoryKey) {
+function loadOptionForSelects() {
   chrome.storage.local.get(Settings.repositoryList, function(data) {
     var repositoryList = data[Settings.repositoryList];
+    if(!repositoryList) return;
 
     repositoryList.forEach(function (repository) {
       $('#repository').append($('<option>', {
