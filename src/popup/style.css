@@ -47,11 +47,11 @@ body#settings {
   margin-top: 10px;
   font-size: 80%;
 }
-.nav-btn a{
+.nav-btn a {
   color: #aaa;
   text-decoration: none;
 }
-.nav-btn a:hover{
+.nav-btn a:hover {
   color: #888;
 }
 small {
@@ -92,6 +92,7 @@ small {
   background-color: #2cbe4e;
   border: 1px solid #2b9148;
 }
-#not-on-github-popup, #main-popup {
+#not-on-github-popup,
+#main-popup {
   display: none;
 }

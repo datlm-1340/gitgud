@@ -29,18 +29,18 @@
   padding: 0.15em 0 0.15em 1.5em;
   margin-bottom: 0.2em;
   text-indent: 0.4em;
-  list-style:none;
+  list-style: none;
   background-size: 1.8em;
   background-repeat: no-repeat;
-  background-image: url('chrome-extension://__MSG_@@extension_id__/images/alpha__page.svg');
+  background-image: url("chrome-extension://__MSG_@@extension_id__/images/alpha__page.svg");
 }
 
 #jk-hierarchy ul li.folder {
-  background-image: url('chrome-extension://__MSG_@@extension_id__/images/objects__folder--open.svg');
+  background-image: url("chrome-extension://__MSG_@@extension_id__/images/objects__folder--open.svg");
 }
 
 #jk-hierarchy ul li.folder.collapsed {
-  background-image: url('chrome-extension://__MSG_@@extension_id__/images/alpha__folder.svg');
+  background-image: url("chrome-extension://__MSG_@@extension_id__/images/alpha__folder.svg");
 }
 
 #jk-hierarchy ul li.gitgud-danger {
@@ -53,7 +53,7 @@
 
 #develop-notice {
   background: #cb2431;
-  color: #FFFFFF;
+  color: #ffffff;
   display: block;
   font-size: 25px;
   left: 0px;
@@ -102,7 +102,10 @@
   padding: 1px 3px;
 }
 
-.warning-count, .danger-count, .comment-count, .unopened-count {
+.warning-count,
+.danger-count,
+.comment-count,
+.unopened-count {
   color: #fff;
   font-size: 11px;
   margin-left: 5px;
@@ -130,7 +133,7 @@
   text-align: center;
   border-radius: 6px;
   border: 1px solid #efe4b1;
-};
+}
 
 .gitgud-tooltip {
   cursor: pointer;
@@ -146,8 +149,8 @@
   z-index: 999;
 }
 
-.gitgud-tooltip-content p{
-  min-width: 100px;
+.gitgud-tooltip-content p {
+  min-width: 50px;
   width: max-content;
   max-width: 400px;
   margin-bottom: 0px;
@@ -165,7 +168,7 @@
 
 .gitgud-tooltip-content::before {
   background-color: #24292e;
-  content: ' ';
+  content: " ";
   position: absolute;
   width: 15px;
   height: 15px;

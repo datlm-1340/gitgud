@@ -2,7 +2,11 @@ function HierarchyGeneratorService() {
   this.cnt = 0;
 }
 
-HierarchyGeneratorService.prototype.generateAndApplyHierarchyHtml = function (files, fileIDs, hierarchy) {
+HierarchyGeneratorService.prototype.generateAndApplyHierarchyHtml = function (
+  files,
+  fileIDs,
+  hierarchy
+) {
   this.files = files;
   this.fileIDs = fileIDs;
   this.element = hierarchy;
@@ -19,7 +23,7 @@ HierarchyGeneratorService.prototype.getCompressedHierarchy = function () {
 HierarchyGeneratorService.prototype.getHierarchyStructure = function (files) {
   var result = {};
   for (key in files) {
-    var parts = files[key].split('/');
+    var parts = files[key].split("/");
     this.addProp(result, parts);
   }
 
@@ -52,14 +56,14 @@ HierarchyGeneratorService.prototype.compressHierarchy = function (hierarchy) {
 
   function traverse(obj, newObj, path) {
     for (var key in obj) {
-      if (!path || typeof obj[key] != 'string') {
-        path = path + String(key) + '/';
+      if (!path || typeof obj[key] != "string") {
+        path = path + String(key) + "/";
       }
 
-      if (typeof obj[key] == 'string') {
+      if (typeof obj[key] == "string") {
         if (Object.keys(obj).length == 1) {
           newObj[path] = {};
-          newObj[path][String(key) + '/'] = obj[key];
+          newObj[path][String(key) + "/"] = obj[key];
         } else {
           newObj[path] = obj[key];
         }
@@ -68,7 +72,7 @@ HierarchyGeneratorService.prototype.compressHierarchy = function (hierarchy) {
         continue;
       }
 
-      if (typeof obj[key] == 'object' && Object.keys(obj[key]).length > 1) {
+      if (typeof obj[key] == "object" && Object.keys(obj[key]).length > 1) {
         newObj[path] = {};
         traverse(obj[key], newObj[path], "");
         path = "";
@@ -81,28 +85,32 @@ HierarchyGeneratorService.prototype.compressHierarchy = function (hierarchy) {
   }
 };
 
-HierarchyGeneratorService.prototype.generateAndApplyHtml = function (hierarchy, structure, fileIDs) {
-  var list = $(document.createElement('ul'));
+HierarchyGeneratorService.prototype.generateAndApplyHtml = function (
+  hierarchy,
+  structure,
+  fileIDs
+) {
+  var list = $(document.createElement("ul"));
   var that = this;
 
   $.each(structure, function (index, file) {
-    var label = (typeof file == 'string') ? file : index;
-    var item = $('<li>' + label + '</li>');
+    var label = typeof file == "string" ? file : index;
+    var item = $("<li>" + label + "</li>");
 
-    if (typeof structure[index] === 'object') {
-      item.addClass('folder');
-    } else if (typeof structure[index] === 'string') {
-      item = $('<li><span class="file-name">' + label + '</span></li>');
-      item.addClass('jk-file');
+    if (typeof structure[index] === "object") {
+      item.addClass("folder");
+    } else if (typeof structure[index] === "string") {
+      item = $('<li><span class="file-name">' + label + "</span></li>");
+      item.addClass("jk-file");
       item.attr("data-file-id", fileIDs[that.cnt]);
-      item.attr("data-file-type", label.split('.').pop());
+      item.attr("data-file-type", label.split(".").pop());
       that.cnt = that.cnt + 1;
     }
 
     list.append(item);
     hierarchy.append(list);
 
-    if (typeof structure[index] === 'object') {
+    if (typeof structure[index] === "object") {
       that.generateAndApplyHtml(list, structure[index], fileIDs);
     }
   });

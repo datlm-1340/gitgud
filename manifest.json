@@ -2,9 +2,12 @@
   "manifest_version": 2,
   "name": "GITGUD - MAKE GIT GUD AGAIN",
   "description": "This extension adds hotkeys, hierarchical file view and show warnings from a pre-defined checklist to GitHub pull requests",
-  "version": "1.2.0",
+  "version": "2.0.3",
+  "icons": {
+    "32": "images/icon32.png",
+    "128": "images/icon128.png"
+  },
   "browser_action": {
-    "default_icon": "images/icon.png",
     "default_popup": "index.html"
   },
   "options_page": "options.html",
@@ -16,21 +19,10 @@
   ],
   "content_scripts": [
     {
-      "matches": [
-        "https://github.com/*"
-      ],
-      "js": [
-        "static/js/vendor.min.js",
-        "static/js/main.min.js"
-      ],
-      "css": [
-        "static/css/main.css"
-      ]
+      "matches": ["https://github.com/*"],
+      "js": ["static/js/vendor.min.js", "static/js/main.min.js"],
+      "css": ["static/css/main.css"]
     }
   ],
-  "web_accessible_resources": [
-    "images/*.svg",
-    "images/*.png",
-    "options.html"
-  ]
+  "web_accessible_resources": ["images/*.svg", "images/*.png", "options.html"]
 }

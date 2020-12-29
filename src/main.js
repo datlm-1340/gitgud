@@ -1,5 +1,7 @@
 function Main() {}
 
+const repositoryKey = window.location.href.split("/")[4];
+
 Main.prototype.init = function () {
   this.hiddenSidebarUrls = [];
   this.pageLoadWaitTimeout = 1000;
@@ -8,7 +10,7 @@ Main.prototype.init = function () {
   this.generateApp();
 
   if (window == top) {
-    window.addEventListener('keyup', this.doKeyPress.bind(this), false);
+    window.addEventListener("keyup", this.doKeyPress.bind(this), false);
     setInterval(this.monitorUrlChange.bind(this), 100);
   }
 
@@ -17,14 +19,14 @@ Main.prototype.init = function () {
 
 Main.prototype.generateApp = function () {
   this.currentPageUrl = this.getWindowLocationHref();
-  this.toolBarHeight = $('.pr-toolbar').height();
-  this.initialNumberOfFiles = $('.file').length;
+  this.toolBarHeight = $(".pr-toolbar").height();
+  this.initialNumberOfFiles = $(".file").length;
 
   var files = [];
   var fileIDs = [];
 
-  $.each($('.file'), function (index, item) {
-    var file = $(item).find('.file-header[data-path]').data('path');
+  $.each($(".file"), function (index, item) {
+    var file = $(item).find(".file-header[data-path]").data("path");
 
     if (file) {
       files[index] = file;
@@ -41,12 +43,20 @@ Main.prototype.generateApp = function () {
 
   var reviewService = new ReviewService(hierarchy);
   reviewService.applyInitStyle();
-  reviewService.reviewDiffs();
+
+  chrome.storage.local.get(repositoryKey, function (checklist) {
+    reviewService.reviewDiffs(checklist);
+  });
+
   reviewService.appendShowMore();
   reviewService.appendCommentCounts();
   reviewService.appendNoDiffMessage();
 
-  var appInteractionService = new AppInteractionService(this.toolBarHeight, this.hotKeysService, this);
+  var appInteractionService = new AppInteractionService(
+    this.toolBarHeight,
+    this.hotKeysService,
+    this
+  );
   appInteractionService.attachFolderCollapseBehavior(hierarchy);
   appInteractionService.attachJumpOnClickBehavior(hierarchy);
   appInteractionService.updateCurentDiffPos();
@@ -56,7 +66,7 @@ Main.prototype.generateApp = function () {
 
 Main.prototype.doKeyPress = function (e) {
   var clickedTarget = $(e.target).prop("tagName");
-  if (clickedTarget != 'BODY' && clickedTarget != undefined) {
+  if (clickedTarget != "BODY" && clickedTarget != undefined) {
     return;
   }
 
@@ -68,7 +78,7 @@ Main.prototype.doKeyPress = function (e) {
 Main.prototype.monitorUrlChange = function () {
   if (!this.isSameUrl()) {
     this.currentPageUrl = this.getWindowLocationHref();
-    $('#jk-hierarchy').remove();
+    $("#jk-hierarchy").remove();
   }
 };
 
@@ -81,18 +91,19 @@ Main.prototype.getWindowLocationHref = function () {
 };
 
 Main.prototype.monitorLazyLoading = function () {
-  if (this.initialNumberOfFiles != $('.file').length) {
-    $('#jk-hierarchy').remove();
+  if (this.initialNumberOfFiles != $(".file").length) {
+    $("#jk-hierarchy").remove();
     this.generateApp();
   }
 };
 
-$(document).ready(function() {
-  $('body').on('click', '.load-diff-button', function() {
+$(document).ready(function () {
+  $("body").on("click", ".load-diff-button", function () {
     var hierarchy = $('<p id="jk-hierarchy"></p>');
     var reviewService = new ReviewService(hierarchy);
     var currentId = $(this).closest("div.file").attr("id");
-
-    reviewService.reviewDiffs(currentId);
+    chrome.storage.local.get(repositoryKey, function (checklist) {
+      reviewService.reviewDiffs(checklist, currentId);
+    });
   });
 });
