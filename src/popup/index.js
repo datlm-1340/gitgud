@@ -77,7 +77,7 @@ function fetchData(isSetting, settings) {
                   { active: true, currentWindow: true },
                   function (arrayOfTabs) {
                     var code = "window.location.reload();";
-                    console.log(arrayOfTabs[0]);
+
                     chrome.tabs.executeScript(arrayOfTabs[0].id, {
                       code: code,
                     });

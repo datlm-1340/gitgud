@@ -191,7 +191,6 @@ ReviewService.prototype.reviewDiffs = function (checklist, singleFile) {
   }
 
   function review(checklist, file, additions, isSingleFile) {
-    console.count();
     var repositoryKey = window.location.href.split("/")[4];
     var warningCounts = 0;
     var dangerCounts = 0;

@@ -41,6 +41,9 @@ Main.prototype.generateApp = function () {
 
   $("body").prepend(hierarchy);
 
+  var descriptionService = new DescriptionService();
+  descriptionService.reviewDescription();
+
   var reviewService = new ReviewService(hierarchy);
   reviewService.applyInitStyle();
 
@@ -102,8 +105,17 @@ $(document).ready(function () {
     var hierarchy = $('<p id="jk-hierarchy"></p>');
     var reviewService = new ReviewService(hierarchy);
     var currentId = $(this).closest("div.file").attr("id");
+
     chrome.storage.local.get(repositoryKey, function (checklist) {
       reviewService.reviewDiffs(checklist, currentId);
     });
+  });
+
+  $("body").on("click", "button.btn-primary.btn", function () {
+    var descriptionService = new DescriptionService();
+
+    setTimeout(function () {
+      descriptionService.reviewDescription(true);
+    }, 5000);
   });
 });

@@ -179,3 +179,7 @@
   left: 50%;
   transform: translate(-50%, calc(100% - 20px)) rotate(45deg);
 }
+
+.description-reviewed {
+  color: #ff9c4e;
+}
