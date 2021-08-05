@@ -1,39 +1,8 @@
 const Settings = {
-  checklistKey: "GITGUD_CHECKLIST",
-  repositoryKey: "GITGUD_REPOSITORY",
   repositoryList: "GITGUD_REPOSITORIES",
   repositoryKeyIndex: 4,
   settingAttributes: ["repository-url", "endpoint", "username", "password"],
 };
-
-function saveRepositoryKey() {
-  chrome.tabs.query(
-    {
-      active: true,
-      lastFocusedWindow: true,
-    },
-    function (tabs) {
-      var currentTab = tabs[0];
-      if (currentTab.url.includes("github.com")) {
-        var repositoryKey =
-          currentTab.url.split("/")[Settings.repositoryKeyIndex];
-
-        sessionStorage.setItem(Settings.repositoryKey, repositoryKey);
-      }
-    }
-  );
-  return sessionStorage.getItem(Settings.repositoryKey);
-}
-
-function getRepositoryKey() {
-  var repositoryKey = sessionStorage.getItem(Settings.repositoryKey);
-
-  if (repositoryKey === null) {
-    saveRepositoryKey();
-    repositoryKey = sessionStorage.getItem(Settings.repositoryKey);
-  }
-  return repositoryKey;
-}
 
 function fetchData(isSetting, settings) {
   chrome.tabs.query(
@@ -77,7 +46,7 @@ function fetchData(isSetting, settings) {
                   { active: true, currentWindow: true },
                   function (arrayOfTabs) {
                     var code = "window.location.reload();";
-                    console.log(arrayOfTabs[0]);
+
                     chrome.tabs.executeScript(arrayOfTabs[0].id, {
                       code: code,
                     });
@@ -204,7 +173,8 @@ function loadOptionForSelects() {
 
 function addToRepositoryList(repositoryKey) {
   chrome.storage.local.get(Settings.repositoryList, function (data) {
-    var repositoryList = data[Settings.repositoryList];
+    var repositoryList = data[Settings.repositoryList] || [];
+
     repositoryList.push(repositoryKey);
     uniqueRepositoryList = repositoryList.filter(function (value, index, self) {
       return (
@@ -213,6 +183,7 @@ function addToRepositoryList(repositoryKey) {
     });
 
     data[Settings.repositoryList] = uniqueRepositoryList;
+
     chrome.storage.local.set(data);
   });
 }
