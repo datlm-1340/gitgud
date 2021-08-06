@@ -183,3 +183,7 @@
 .indicator {
   padding-left: 10px;
 }
+
+.description-reviewed .gitgud-tooltip-content {
+  height: 3em;
+}
