@@ -183,3 +183,7 @@
 .description-reviewed {
   color: #ff9c4e;
 }
+
+.description-reviewed .gitgud-tooltip-content {
+  height: 3em;
+}
