@@ -135,7 +135,7 @@
   border: 1px solid #efe4b1;
 }
 
-.gitgud-tooltip {
+.gitgud-tooltip { 
   cursor: pointer;
 }
 
@@ -178,4 +178,8 @@
   top: 0;
   left: 50%;
   transform: translate(-50%, calc(100% - 20px)) rotate(45deg);
+}
+
+.indicator {
+  padding-left: 10px;
 }

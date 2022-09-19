@@ -100,7 +100,7 @@ ReviewService.prototype.reviewDiffs = function (checklist, singleFile) {
 
     if (report.warningCounts > 0) {
       var indicator = $(
-        '<span class="gitgud-tooltip warning-count">' +
+        '<span class="gitgud-tooltip warning-count blob-code-inner indicator">' +
           '<b class="icon-warning">' +
           report.warningCounts +
           "</b>" +
@@ -123,7 +123,7 @@ ReviewService.prototype.reviewDiffs = function (checklist, singleFile) {
 
     if (report.dangerCounts > 0) {
       var indicator = $(
-        '<span class="gitgud-tooltip danger-count">' +
+        '<span class="gitgud-tooltip danger-count blob-code-inner indicator">' +
           '<b class="icon-danger">' +
           report.dangerCounts +
           "</b>" +
