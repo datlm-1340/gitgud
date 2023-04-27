@@ -27,9 +27,9 @@ $ npm run build
 - Chọn thư mục `../gitgud/build` và chọn select.
 - Extension sẽ được load thành công.
 
-**2, Sử dụng bản build sẵn.**
+**2, Sử dụng bản public trên webstore.**
 
-- Liên hệ ĐạtLM để lấy bản build sẵn , sau đó cài đặt qua `chrome://extensions/` như trên.
+https://chrome.google.com/webstore/detail/gitgud/nekbiaocmiakamdmideljmmbpomdidfe
 
 ### Thêm repository mới
 
