@@ -41,14 +41,14 @@ Main.prototype.generateApp = function () {
 
   $("body").prepend(hierarchy);
 
-  var descriptionService = new DescriptionService();
-  descriptionService.reviewDescription();
+  var metaService = new MetaService();
 
   var reviewService = new ReviewService(hierarchy);
   reviewService.applyInitStyle();
 
   chrome.storage.local.get(repositoryKey, function (checklist) {
     reviewService.reviewDiffs(checklist);
+    metaService.reviewMeta(checklist);
   });
 
   reviewService.appendShowMore();
@@ -112,10 +112,10 @@ $(document).ready(function () {
   });
 
   $("body").on("click", "button.btn-primary.btn", function () {
-    var descriptionService = new DescriptionService();
+    var metaService = new MetaService();
 
     setTimeout(function () {
-      descriptionService.reviewDescription(true);
+      metaService.reviewMeta(true);
     }, 5000);
   });
 });
