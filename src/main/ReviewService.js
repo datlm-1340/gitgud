@@ -195,13 +195,14 @@ ReviewService.prototype.reviewDiffs = function (checklist, singleFile) {
     var warningCounts = 0;
     var dangerCounts = 0;
     var fileType = $(file).data("fileType");
-
     if (!checklist[repositoryKey]) return;
 
-    var checklistData = JSON.parse(checklist[repositoryKey]).checklist;
-
+    var checklistData = JSON.parse(checklist[repositoryKey]).checklist
     if (!checklistData) return;
 
+    checklistData = checklistData.filter(function (item) {
+      return item.type === WARNING || item.type === DANGER;
+    });
     var PRChecklist = filterByFileType(checklistData, fileType);
 
     $.each(additions, function (index, addition) {

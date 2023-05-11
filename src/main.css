@@ -135,7 +135,7 @@
   border: 1px solid #efe4b1;
 }
 
-.gitgud-tooltip { 
+.gitgud-tooltip {
   cursor: pointer;
 }
 
@@ -182,4 +182,48 @@
 
 .indicator {
   padding-left: 10px;
+}
+
+.description-reviewed .gitgud-tooltip-content {
+  height: 3em;
+}
+
+#title-warning {
+  position: relative;
+}
+
+#title-warning .gitgud-tooltip-content::before {
+  background-color: #24292e;
+  content: " ";
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  top: 0;
+  left: 15px;
+  transform: translate(-50%, calc(100% - 20px)) rotate(45deg);
+}
+
+#title-warning:hover .gitgud-tooltip-content {
+  display: block;
+  top: 40px;
+  left: -2px;
+  position: absolute;
+  z-index: 999;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 12px !important;
+  line-height: 1.25 !important;
+}
+
+span.head-ref:hover .gitgud-tooltip-content {
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%, calc(100% + 10px));
+  display: block;
+  position: absolute;
+  z-index: 999;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 12px !important;
+  line-height: 1.25 !important;
 }
