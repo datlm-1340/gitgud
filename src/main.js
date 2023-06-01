@@ -110,12 +110,4 @@ $(document).ready(function () {
       reviewService.reviewDiffs(checklist, currentId);
     });
   });
-
-  $("body").on("click", "button.btn-primary.btn", function () {
-    var metaService = new MetaService();
-
-    setTimeout(function () {
-      metaService.reviewMeta(true);
-    }, 5000);
-  });
 });

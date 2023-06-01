@@ -15,18 +15,20 @@ MetaService.prototype.reviewMeta = function (checklist ,edited) {
   var titleChecklist = checklistData.filter(function (item) {
     return item.type === TITLE
   });
-  reviewTitle(titleChecklist)
+
+  if (titleChecklist) reviewTitle(titleChecklist);
 
   var branchChecklist = checklistData.filter(function (item) {
     return item.type === BRANCH
   });
-  reviewBranch(branchChecklist)
+  if (branchChecklist) reviewBranch(branchChecklist);
 };
 
 
 function reviewTitle(titleChecklist) {
   var warnings = [];
-  var title = $("h1.gh-header-title span.js-issue-title").text();
+  var title = $("h1.gh-header-title .js-issue-title").text();
+
   titleChecklist.forEach(function (item, i) {
     if(!isMatch(title, item)) warnings.push(item);
   });
