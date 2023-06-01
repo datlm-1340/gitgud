@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "GITGUD",
   "description": "This extension adds hotkeys, hierarchical file view and show warnings from a pre-defined checklist to GitHub pull requests",
-  "version": "2.1.0",
+  "version": "2.2.2",
 
   "content_scripts": [
     {
